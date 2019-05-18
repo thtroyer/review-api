@@ -1,7 +1,6 @@
 package com.thtroyer.review_api.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Review {

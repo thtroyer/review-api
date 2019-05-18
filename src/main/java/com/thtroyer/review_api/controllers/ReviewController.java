@@ -3,10 +3,7 @@ package com.thtroyer.review_api.controllers;
 import com.thtroyer.review_api.model.Category;
 import com.thtroyer.review_api.model.Product;
 import com.thtroyer.review_api.model.Review;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,5 +52,10 @@ public class ReviewController {
         );
 
         return test;
+    }
+
+    @PostMapping
+    public void addReview() {
+        //@todo
     }
 }
