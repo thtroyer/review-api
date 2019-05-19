@@ -15,21 +15,21 @@ public class ReviewController {
     @GetMapping(value = {"/", "/review"})
     public List<Review> index() {
         List<Category> categories = new ArrayList<>();
-        categories.add(new Category("food"));
-        categories.add(new Category("pizza"));
+        categories.add(new Category(1, "food"));
+        categories.add(new Category(2, "pizza"));
 
         Review pizza1 = new Review(
                 1,
                 9,
                 "Great for freezer pizza!",
-                new Product("Homerun Pizza", "Pepperoni Pizza", "Thin Crust"),
+                new Product(1, "Homerun Pizza", "Pepperoni Pizza", "Thin Crust"),
                 categories
         );
         Review pizza2 = new Review(
                 2,
                 6,
                 "Meh",
-                new Product("Jack's", "Pepperoni Pizza", "Thin Crust"),
+                new Product(2, "Jack's", "Pepperoni Pizza", "Thin Crust"),
                 categories
         );
 
@@ -41,13 +41,13 @@ public class ReviewController {
     public Review getReviewById(@PathVariable Integer id) {
 
         List<Category> categories = new ArrayList<>();
-        categories.add(new Category("food"));
-        categories.add(new Category("pizza"));
+        categories.add(new Category(1, "food"));
+        categories.add(new Category(2, "pizza"));
         Review test = new Review(
                 1,
                 6,
                 "Meh",
-                new Product("Jack's", "Pepperoni Pizza", "Thin Crust"),
+                new Product(1, "Jack's", "Pepperoni Pizza", "Thin Crust"),
                 categories
         );
 
