@@ -7,10 +7,8 @@ import com.thtroyer.review_api.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 
 @RestController
 public class ReviewController {
@@ -18,49 +16,18 @@ public class ReviewController {
     private ReviewRepository reviewRepository;
 
     @GetMapping(value = {"/", "/review"})
-    public List<Review> index() {
-        List<Category> categories = new ArrayList<>();
-        categories.add(new Category(1, "food"));
-        categories.add(new Category(2, "pizza"));
-
-        Review pizza1 = new Review(
-                1L,
-                9,
-                "Great for freezer pizza!",
-                new Product(1, "Homerun Pizza", "Pepperoni Pizza", "Thin Crust"),
-                categories
-        );
-        Review pizza2 = new Review(
-                2L,
-                6,
-                "Meh",
-                new Product(2, "Jack's", "Pepperoni Pizza", "Thin Crust"),
-                categories
-        );
-
-        return asList(pizza1, pizza2);
+    public List<Review> getAllReviews() {
+        return reviewRepository.findAll();
     }
 
     @GetMapping("/review/{id}")
     @ResponseBody
-    public Review getReviewById(@PathVariable Integer id) {
-
-        List<Category> categories = new ArrayList<>();
-        categories.add(new Category(1, "food"));
-        categories.add(new Category(2, "pizza"));
-        Review test = new Review(
-                 1L,
-                6,
-                "Meh",
-                new Product(1, "Jack's", "Pepperoni Pizza", "Thin Crust"),
-                categories
-        );
-
-        return test;
+    public Review getReviewById(@PathVariable Long id) throws Exception {
+        return reviewRepository.findById(id).orElseThrow(()->new Exception("Review not found"));
     }
 
     @PostMapping
-    public void addReview() {
-        //@todo
+    public void addReview(@RequestBody Review review) {
+        reviewRepository.save(review);
     }
 }

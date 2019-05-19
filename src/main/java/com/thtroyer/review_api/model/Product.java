@@ -11,8 +11,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "product")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"})
 public class Product {
 
     @Id
@@ -31,40 +29,54 @@ public class Product {
     @CreatedDate
     private Date createdAt;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
-
+    public Product() {
+        createdAt = new Date();
+    }
 
     public Product(int id, String brand, String name, String description) {
         this.brand = brand;
         this.name = name;
         this.description = description;
+        createdAt = new Date();
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getBrand() {
         return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

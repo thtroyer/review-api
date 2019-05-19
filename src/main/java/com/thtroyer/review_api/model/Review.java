@@ -1,18 +1,13 @@
 package com.thtroyer.review_api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "review")
-@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = "createdAt")
 public class Review {
     @Id
@@ -30,15 +25,7 @@ public class Review {
     @OneToMany
     private List<Category> categories;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
+    public Review() {}
 
     public Review(Long id, int rating, String notes, Product product, List<Category> categories) {
         this.id = id;
@@ -52,27 +39,39 @@ public class Review {
         return id;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public String getNotes() {
         return notes;
     }
 
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     public Product getProduct() {
         return product;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }
