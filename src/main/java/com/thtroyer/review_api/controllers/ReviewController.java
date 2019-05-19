@@ -3,6 +3,8 @@ package com.thtroyer.review_api.controllers;
 import com.thtroyer.review_api.model.Category;
 import com.thtroyer.review_api.model.Product;
 import com.thtroyer.review_api.model.Review;
+import com.thtroyer.review_api.repository.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ import static java.util.Arrays.asList;
 
 @RestController
 public class ReviewController {
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     @GetMapping(value = {"/", "/review"})
     public List<Review> index() {
         List<Category> categories = new ArrayList<>();
@@ -19,14 +24,14 @@ public class ReviewController {
         categories.add(new Category(2, "pizza"));
 
         Review pizza1 = new Review(
-                1,
+                1L,
                 9,
                 "Great for freezer pizza!",
                 new Product(1, "Homerun Pizza", "Pepperoni Pizza", "Thin Crust"),
                 categories
         );
         Review pizza2 = new Review(
-                2,
+                2L,
                 6,
                 "Meh",
                 new Product(2, "Jack's", "Pepperoni Pizza", "Thin Crust"),
@@ -44,7 +49,7 @@ public class ReviewController {
         categories.add(new Category(1, "food"));
         categories.add(new Category(2, "pizza"));
         Review test = new Review(
-                1,
+                 1L,
                 6,
                 "Meh",
                 new Product(1, "Jack's", "Pepperoni Pizza", "Thin Crust"),
