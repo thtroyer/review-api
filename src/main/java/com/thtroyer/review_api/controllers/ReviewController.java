@@ -1,10 +1,7 @@
 package com.thtroyer.review_api.controllers;
 
-import com.thtroyer.review_api.model.Category;
-import com.thtroyer.review_api.model.Product;
 import com.thtroyer.review_api.model.Review;
 import com.thtroyer.review_api.repository.ReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +9,11 @@ import java.util.List;
 
 @RestController
 public class ReviewController {
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
+
+    public ReviewController(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
 
     @GetMapping(value = {"/", "/review"})
     public List<Review> getAllReviews() {
