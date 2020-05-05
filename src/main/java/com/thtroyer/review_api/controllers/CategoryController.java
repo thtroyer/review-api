@@ -1,7 +1,7 @@
 package com.thtroyer.review_api.controllers;
 
 import com.thtroyer.review_api.model.Category;
-import com.thtroyer.review_api.repository.CategoryRepository;
+import com.thtroyer.review_api.services.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,19 +9,19 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class CategoryController {
-    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
-    public CategoryController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/category")
     public List<Category> getCategoryList() {
-        return categoryRepository.findAll();
+        return categoryService.getCategoryList();
     }
 
     @PostMapping("/category")
     public void addCategory(@RequestBody Category category) {
-        categoryRepository.save(category);
+        categoryService.addCategory(category);
     }
 }

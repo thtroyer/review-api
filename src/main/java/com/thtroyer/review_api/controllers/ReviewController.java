@@ -1,7 +1,7 @@
 package com.thtroyer.review_api.controllers;
 
 import com.thtroyer.review_api.model.Review;
-import com.thtroyer.review_api.repository.ReviewRepository;
+import com.thtroyer.review_api.services.ReviewService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,25 +9,25 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class ReviewController {
-    private final ReviewRepository reviewRepository;
+    private final ReviewService reviewService;
 
-    public ReviewController(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
     }
 
     @GetMapping(value = {"/", "/review"})
     public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+        return reviewService.getAllReviews();
     }
 
     @GetMapping("/review/{id}")
     @ResponseBody
     public Review getReviewById(@PathVariable Long id) throws Exception {
-        return reviewRepository.findById(id).orElseThrow(()->new Exception("Review not found"));
+        return reviewService.getReviewById(id);
     }
 
     @PostMapping
     public void addReview(@RequestBody Review review) {
-        reviewRepository.save(review);
+        reviewService.addReview(review);
     }
 }

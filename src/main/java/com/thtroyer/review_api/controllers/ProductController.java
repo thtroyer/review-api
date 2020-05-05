@@ -1,7 +1,7 @@
 package com.thtroyer.review_api.controllers;
 
 import com.thtroyer.review_api.model.Product;
-import com.thtroyer.review_api.repository.ProductRepository;
+import com.thtroyer.review_api.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,19 +9,19 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class ProductController {
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("/product")
     public List<Product> getProductList() {
-        return productRepository.findAll();
+        return productService.getAllProducts();
     }
 
     @PostMapping("/product")
     public void addProduct(@RequestBody Product product) {
-        productRepository.save(product);
+        productService.addProduct(product);
     }
 }
